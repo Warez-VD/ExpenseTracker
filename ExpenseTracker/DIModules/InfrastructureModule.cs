@@ -1,5 +1,6 @@
 ﻿using ExpenseTracker.Application.Common.Interfaces;
 using ExpenseTracker.Infrastructure.Persistance;
+using ExpenseTracker.Infrastructure.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,6 +21,7 @@ namespace ExpenseTracker.UI.DIModules
                     b => b.MigrationsAssembly(typeof(ExpenseTrackerDbContext).Assembly.FullName)));
 
             services.AddScoped<IExpenseTrackerDbContext>(provider => provider.GetService<ExpenseTrackerDbContext>());
+            services.AddScoped<IDateTimeService, DateTimeService>();
 
             return services;
         }

@@ -1,0 +1,10 @@
+﻿CREATE TABLE [dbo].[Wallets]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Name] NVARCHAR(40) NOT NULL, 
+    [Amount] MONEY NOT NULL, 
+    [CreatedOn] DATETIME2 NOT NULL, 
+    [CreatedBy] UNIQUEIDENTIFIER NOT NULL, 
+    [ModifiedOn] DATETIME2 NULL, 
+    [ModifiedBy] UNIQUEIDENTIFIER NULL
+)

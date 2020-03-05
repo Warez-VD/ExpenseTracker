@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using ExpenseTracker.Application.Common.Interfaces;
@@ -37,11 +38,11 @@ namespace ExpenseTracker.Infrastructure.Persistance
                 switch (entry.State)
                 {
                     case EntityState.Added:
-                        entry.Entity.CreatedBy = this.userService.UserId;
+                        entry.Entity.CreatedBy = new Guid(this.userService.UserId);
                         entry.Entity.CreatedOn = this.dateTimeService.Now;
                         break;
                     case EntityState.Modified:
-                        entry.Entity.ModifiedBy = this.userService.UserId;
+                        entry.Entity.ModifiedBy = new Guid(this.userService.UserId);
                         entry.Entity.ModifiedOn = this.dateTimeService.Now;
                         break;
                 }

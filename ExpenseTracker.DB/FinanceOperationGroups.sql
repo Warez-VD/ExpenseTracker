@@ -1,0 +1,9 @@
+﻿CREATE TABLE [dbo].[FinanceOperationGroups]
+(
+	[Id] UNIQUEIDENTIFIER NOT NULL PRIMARY KEY, 
+    [Name] NVARCHAR(255) NOT NULL, 
+    [CreatedOn] DATETIME2 NOT NULL, 
+    [CreatedBy] UNIQUEIDENTIFIER NOT NULL, 
+    [ModifiedOn] DATETIME2 NULL, 
+    [ModifiedBy] UNIQUEIDENTIFIER NULL
+)
