@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 using ExpenseTracker.Application.Common.Interfaces;
 using ExpenseTracker.Domain.Entities;
 using ExpenseTracker.Domain.Entities.Base;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseTracker.Infrastructure.Persistance
 {
-    public class ExpenseTrackerDbContext : IdentityDbContext<ApplicationUser>, IExpenseTrackerDbContext
+    public class ExpenseTrackerDbContext : DbContext, IExpenseTrackerDbContext
     {
         private readonly IUserService userService;
         private readonly IDateTimeService dateTimeService;

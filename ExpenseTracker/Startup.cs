@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using ExpenseTracker.Application.Common.Interfaces;
 using ExpenseTracker.UI.DIModules;
 using ExpenseTracker.UI.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -27,9 +22,12 @@ namespace ExpenseTracker.UI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddInfrastructure(this.Configuration);
-            services.AddControllersWithViews();
             services.AddScoped<IUserService, UserService>();
             services.AddHttpContextAccessor();
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+            services.AddAuthentication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,11 +43,13 @@ namespace ExpenseTracker.UI
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

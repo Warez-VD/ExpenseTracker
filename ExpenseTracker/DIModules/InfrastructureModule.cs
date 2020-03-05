@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Application.Common.Interfaces;
 using ExpenseTracker.Infrastructure.Persistance;
 using ExpenseTracker.Infrastructure.Services;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +21,16 @@ namespace ExpenseTracker.UI.DIModules
                     configuration.GetConnectionString("DefaultConnection"),
                     b => b.MigrationsAssembly(typeof(ExpenseTrackerDbContext).Assembly.FullName)));
 
-            services.AddScoped<IExpenseTrackerDbContext>(provider => provider.GetService<ExpenseTrackerDbContext>());
+            services.AddDbContext<UserDbContext>(options =>
+                options.UseSqlServer(
+                    configuration.GetConnectionString("DefaultConnector"),
+                    b => b.MigrationsAssembly(typeof(UserDbContext).Assembly.FullName)));
+
+            services.AddScoped<UserDbContext, UserDbContext>();
+            services.AddScoped<IExpenseTrackerDbContext, ExpenseTrackerDbContext>();
+            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<UserDbContext>();
+
             services.AddScoped<IDateTimeService, DateTimeService>();
 
             return services;
