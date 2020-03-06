@@ -27,7 +27,6 @@ namespace ExpenseTracker.UI
 
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddAuthentication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,6 +56,7 @@ namespace ExpenseTracker.UI
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

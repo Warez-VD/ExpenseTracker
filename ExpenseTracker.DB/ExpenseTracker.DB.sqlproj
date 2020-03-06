@@ -61,5 +61,15 @@
     <Build Include="Wallets.sql" />
     <Build Include="FinanceOperations.sql" />
     <Build Include="FinanceOperationGroups.sql" />
+    <Build Include="AspNetRoleClaims.sql" />
+    <Build Include="AspNetRoles.sql" />
+    <Build Include="AspNetUserClaims.sql" />
+    <Build Include="AspNetUserLogins.sql" />
+    <Build Include="AspNetUserRoles.sql" />
+    <Build Include="AspNetUsers.sql" />
+    <Build Include="AspNetUserTokens.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="ExpenseTracker.DB.refactorlog" />
   </ItemGroup>
 </Project>
