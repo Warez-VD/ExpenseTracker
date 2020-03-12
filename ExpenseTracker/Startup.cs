@@ -11,21 +11,30 @@ namespace ExpenseTracker.UI
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            this.Configuration = configuration;
+            this.WebHostEnvironment = env;
         }
 
         public IConfiguration Configuration { get; }
 
+        public IWebHostEnvironment WebHostEnvironment { get; }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddApplication();
             services.AddInfrastructure(this.Configuration);
             services.AddScoped<IUserService, UserService>();
             services.AddHttpContextAccessor();
 
-            services.AddControllersWithViews();
+            IMvcBuilder mvcBuilder = services.AddControllersWithViews();
+            if (this.WebHostEnvironment.IsDevelopment())
+            {
+                mvcBuilder.AddRazorRuntimeCompilation();
+            }
+
             services.AddRazorPages();
         }
 

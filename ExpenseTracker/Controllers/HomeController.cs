@@ -2,10 +2,12 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ExpenseTracker.UI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ExpenseTracker.UI.Controllers
 {
-    public class HomeController : Controller
+    [Authorize]
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -16,11 +18,7 @@ namespace ExpenseTracker.UI.Controllers
 
         public IActionResult Index()
         {
-            return View();
-        }
-
-        public IActionResult Privacy()
-        {
+            var test = this.Mediator;
             return View();
         }
 
